@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+    <head>
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap" rel="stylesheet">
+        <link href="styles.css" rel="stylesheet">
+        <title>Trivia!</title>
+        <script defer>
+            function setupMultiChoice() {
+                // get relevant elements
+                const multiChoiceButtonEls = document.querySelectorAll(".multi-choice-button");
+                if (!multiChoiceButtonEls.length) {
+                    alert("multiChoiceButton elements not found");
+                }
+                const messageEl = document.querySelector("#multi-choice-message");
+                if (!messageEl) {
+                    alert("message element not found");
+                }
+
+                let lastSelectedButtonEl;
+
+                // add click listeners to all buttons
+                for (const currentButtonEl of multiChoiceButtonEls) {
+                    currentButtonEl.addEventListener("click", function(event) {
+                        if (lastSelectedButtonEl) {
+                            // remove previous selection button highlighting
+                            lastSelectedButtonEl.classList.remove("correct");
+                            lastSelectedButtonEl.classList.remove("wrong");
+                        }
+                        lastSelectedButtonEl = currentButtonEl;
+
+                        // set new selection highlight
+                        const isCorrect = event.target.innerHTML === "David J. Malan";
+                        currentButtonEl.classList.toggle("correct", isCorrect);
+                        currentButtonEl.classList.toggle("wrong", !isCorrect);
+
+                        // set new selection message text
+                        messageEl.innerHTML = isCorrect ? "Correct!" : "Incorrect";
+                    })
+                }
+            }
+
+            function setupFreeInput() {
+                // get relevant elements
+                const formEl = document.querySelector("#free-choice-input-form");
+                if (!formEl) {
+                    alert("free-choice-input-form element not found");
+                }
+                const inputEl = document.querySelector("#free-choice-input");
+                if (!inputEl) {
+                    alert("input element not found");
+                }
+                const messageEl = document.querySelector("#free-choice-message");
+                if (!messageEl) {
+                    alert("message element not found");
+                }
+
+                // add submit listener
+                formEl.addEventListener("submit", function(event){
+                    event.preventDefault(); // prevent submit refreshing page
+
+                    // set highlight based on answer
+                    const answer = event.target.elements.answer.value.trim().toLowerCase();
+                    const isCorrect = answer === "this was cs50";
+                    inputEl.classList.toggle("correct", isCorrect);
+                    inputEl.classList.toggle("wrong", !isCorrect);
+
+                    // set new selection message text
+                    messageEl.innerHTML = isCorrect ? "Correct!" : "Incorrect";
+                })
+            }
+
+            // setup behavior after page load
+            document.addEventListener("DOMContentLoaded", function() {
+                setupMultiChoice();
+                setupFreeInput();
+            });
+        </script>
+    </head>
+
+    <body>
+        <div class="header">
+            <h1>Trivia!</h1>
+        </div>
+
+        <div class="container">
+            <div class="section">
+                <h2>Part 1: Multiple Choice </h2>
+                <hr>
+                <h3>In 2023 who was Gordon McKay Professor of the Practice of Computer Science, Harvard John A. Paulson School of Engineering and Applied Sciences at Harvard University?</h3>
+                <!-- Default value is a space so it is "invisible" but still takes up some space, to prevent jumping when message is shown -->
+                <p id="multi-choice-message">&nbsp;</p>
+                <div>
+                    <button class="multi-choice-button">Javid D. Malan</button>
+                    <button class="multi-choice-button">David J. Malan</button>
+                    <button class="multi-choice-button">Mavid J. Dalan</button>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2>Part 2: Free Response</h2>
+                <hr>
+                <h3>What is the catchphrase commonly used at the end of CS50 lectures? (Only alphabetical or space characters)</h3>
+                <!-- Default value is a space so it is "invisible" but still takes up some space, to prevent jumping when message is shown -->
+                <p id="free-choice-message">&nbsp;</p>
+                <form id="free-choice-input-form">
+                    <label>
+                        Answer:
+                        <input id="free-choice-input" name="answer" type="text"/>
+                    </label>
+                    <button type="submit">Confirm</button>
+                </form>
+            </div>
+        </div>
+    </body>
+
+</html>

@@ -1,0 +1,35 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Account
+{% endblock %}
+
+{% block main %}
+    <h2 class="mb-3">User Details</h2>
+    <form action="/account" method="post">
+        <div class="mb-3">
+            <input autocomplete="off" autofocus class="form-control mx-auto w-auto" id="username" name="username" placeholder="New Username" type="text" value="{{ user['username'] }}">
+        </div>
+        <div class="mb-3">
+            <input class="form-control mx-auto w-auto" id="password" name="password" placeholder="New Password" type="password">
+            <p>(Leave password field blank to keep existing)</p>
+        </div>
+        <button class="btn btn-primary" type="submit">Update</button>
+    </form>
+
+    <h2 class="mb-3 mt-5">Deposit</h2>
+    <p class="display-6 mb-3">Current Balance: {{ user["cash"] }}</p>
+    <form action="/deposit" method="post">
+        <div class="mb-3">
+            <input autocomplete="off" class="form-control mx-auto w-auto" id="deposit" name="deposit" placeholder="Deposit Amount" type="text">
+        </div>
+        <button class="btn btn-primary" type="submit">Deposit</button>
+    </form>
+
+    {% if message %}
+        <section class="messages">
+            <p class="display-6 mt-3">{{ message }}</p>
+        </section>
+    {% endif %}
+
+{% endblock %}

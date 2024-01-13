@@ -1,0 +1,163 @@
+@font-face {
+    font-family: PokemonHollow;
+    src: url(/fonts/PokemonHollow.ttf);
+}
+
+@font-face {
+    font-family: PokemonXY;
+    src: url(/fonts/PokemonXandY.ttf);
+}
+
+h1,
+h2 {
+    font-family: PokemonHollow;
+}
+
+body {
+    font-family: PokemonXY;
+
+    /* Make body use up all the available height atleast */
+    min-height: 100dvh;
+    display: flex;
+    flex-direction: column;
+}
+
+main {
+    /* Make body use remaining vertical space if header + body + footer doesnt use the whole page */
+    flex: 1;
+
+    /* limit main content width on large screens */
+    max-width: 50rem;
+    margin: auto;
+}
+
+/* Default, for index page */
+header,
+footer {
+    background: var(--bs-danger);
+}
+
+/* ie the brand text in the header */
+nav>a>h1 {
+    /* So this is readable with different colour backgrounds */
+    font-weight: bold;
+
+    /* Try to avoid the menu button being wrapped, by eagerly wrapping the brand text */
+    @media (max-width: 576px) {
+        width: min-content;
+    }
+}
+
+
+body.bulbasaur {
+
+    header,
+    footer {
+        background: var(--bs-success);
+    }
+
+}
+
+body.charmander {
+
+    header,
+    footer {
+        background: orange;
+    }
+
+}
+
+body.squirtle {
+
+    header,
+    footer {
+        background: var(--bs-primary);
+    }
+
+}
+
+.nav-item {
+    font-size: 30px;
+}
+
+section {
+    padding-bottom: 1rem;
+
+    /* Overview section on a specific pokemon page */
+    &.overview {
+        display: flex;
+        place-items: center;
+        place-content: center;
+        flex-wrap: wrap;
+        gap: 1rem;
+
+        img {
+            width: 10rem;
+        }
+
+        .details {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+
+            .text-bg-purple {
+                color: white;
+                background: purple;
+            }
+        }
+    }
+}
+
+/*
+Use a pokeball as the nav-toggle icon,
+ie a closed ball when the menu is closed
+and an open ball when menu open
+*/
+.navbar-toggler {
+    img {
+        display: none;
+        width: 3rem;
+        height: 3rem;
+    }
+
+    &[aria-expanded=true] {
+        .open-image {
+            display: unset;
+        }
+    }
+
+    &[aria-expanded=false] {
+        .close-image {
+            display: unset;
+        }
+    }
+}
+
+/* Improve link styling, to work with different backgrounds and font colours */
+a {
+    color: inherit;
+    text-decoration: underline dotted;
+
+    &:hover {
+        text-decoration: underline;
+    }
+}
+
+/* for index page, add effect to highlight a card on hover */
+.starter-list {
+
+    &:has(.card:hover) {
+        .card {
+            img {
+                filter: grayscale(1);
+            }
+        }
+    }
+
+    .card:hover {
+        img {
+            filter: unset !important;
+        }
+    }
+
+}

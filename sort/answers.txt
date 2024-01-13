@@ -1,0 +1,11 @@
+sort1 uses: Bubble sort
+
+How do you know?: For sorted data (ie best case), the performance is roughly "n" and only bubble sort has this best case performance. For unsorted data performance is roughly roughly exponential with increasing input size, this also sounds like bubble sort which has a worst case performance of "n^2"
+
+sort2 uses: Merge sort
+
+How do you know?: Performance for sorted, reversed, or random is fairly consistent with increasing input size, but it is less than linear, so the algorithm is likely merge sort ie "nlog(n)" for both best and worst case
+
+sort3 uses: Selection sort
+
+How do you know?: Performance for sorted, reversed, or random is fairly consistent with increasing input size, but it is roughly exponential with increasing input size, so the algorithm is likely selection sort ie "n^2" for both best and worst case

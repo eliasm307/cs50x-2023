@@ -1,0 +1,28 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Register
+{% endblock %}
+
+{% block main %}
+
+    <section class="row justify-content-center">
+        <form class="col-12 col-md-6" action="/register" method="post">
+            <h2 class="mb-5 mt-3">Register</h2>
+            <div class="form-floating mb-3">
+                <input autocomplete="off" autofocus class="form-control" id="username" name="username" placeholder="Username" type="text">
+                <label for="text">Username</label>
+            </div>
+            <div class="form-floating mb-3">
+                <input class="form-control" id="password" name="password" placeholder="Password" type="password">
+                <label for="text">Password</label>
+            </div>
+            <div class="form-floating mb-3">
+                <input class="form-control" id="confirmation" name="confirmation" placeholder="Confirm Password" type="password">
+                <label for="text">Confirm Password</label>
+            </div>
+            <button class="btn btn-danger" type="submit">Confirm</button>
+        </form>
+    </section>
+
+{% endblock %}

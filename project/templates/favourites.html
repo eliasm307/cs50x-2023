@@ -1,0 +1,56 @@
+{% extends "layout.html" %}
+
+
+{% block title %}
+    Favourites
+{% endblock %}
+
+
+{% block main %}
+
+    {% if list|length == 0 %}
+        <p class="display-4 mt-4">No favourites added</p>
+
+    {% else %}
+        <h2 class="mb-5 mt-3">My Favourites</h2>
+
+        <div class="container mt-3">
+            <form class="row gap-3">
+                <div class="form-floating col-12 col-md g-0">
+                    <input autocomplete="off" autofocus class="form-control" id="text" name="text" placeholder="Name Includes" type="text" value="{{ search_text }}">
+                    <label for="text">Name Includes</label>
+                </div>
+                <button class="col-12 col-md-2 btn btn-danger" type="submit">Filter</button>
+            </form>
+            <div class="mt-4 row text-center w-100">
+                <p>Showing {{ list|length }} / {{ total_count }} Pokemon</p>
+            </div>
+        </div>
+
+        <section class="container list">
+            <div class="row">
+                {% for pokemon in list %}
+                    <div class="col-12 col-md-6 col-lg-4 col-xl-3 p-3">
+                        <a class="card pokemon" href="/pokemon/{{ pokemon.id }}">
+                            <article>
+                                <img class="card-img-top p-3 object-fit-contain" alt="{{ pokemon.name }}" src="{{ pokemon.graphic_url }}" onerror="handlePokemonGraphicLoadError(this)" loading="lazy">
+                                <div class="card-body">
+                                    <div class="card-text">
+                                        <h3>{{ pokemon.name }}</h3>
+                                        <form method="post">
+                                            <input type="hidden" name="action" value="{{ favourite_button_action }}">
+                                            <input type="hidden" name="pokemon_id" value="{{ pokemon.id  }}">
+                                            <button class="btn btn-danger">{{ favourite_button_action }}</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </article>
+                        </a>
+                    </div>
+                {% endfor %}
+            </div>
+    {% endif %}
+
+    </section>
+
+{% endblock %}

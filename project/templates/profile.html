@@ -1,0 +1,26 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Profile
+{% endblock %}
+
+{% block main %}
+
+    <section class="row justify-content-center">
+        <form class="col-12 col-md-6" action="/profile" method="post">
+            <h2 class="mb-5 mt-3">My Profile</h2>
+            <p>Current user name: {{ user['name'] }}</p>
+            <div class="form-floating mb-3">
+                <input autocomplete="off" autofocus class="form-control" id="username" name="username" placeholder="New Username" type="text">
+                <label for="text">New Username</label>
+            </div>
+            <div class="form-floating mb-3">
+                <input class="form-control" autocomplete="off" id="password" name="password" placeholder="New Password" type="password">
+                <label for="text">New Password</label>
+            </div>
+            <p>(NOTE: Leave field blank to keep existing)</p>
+            <button class="btn btn-danger" type="submit">Update</button>
+        </form>
+    </section>
+
+{% endblock %}

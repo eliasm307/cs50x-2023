@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+    <head>
+
+        <!-- add metadata -->
+        <title>CS50 Pokedex: {% block title %}{% endblock %}</title>
+        <link rel="icon" type="image/png" href="/static/media/pokeball.png">
+        <meta charset="utf-8">
+        <meta name="viewport" content="initial-scale=1, width=device-width">
+
+        <!-- setup bootstrap -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+        <script defer src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+        <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
+
+        <!-- add app customisation -->
+        <link href="/static/styles.css" rel="stylesheet">
+
+        <!-- add global scripts -->
+        <script>
+            function handlePokemonGraphicLoadError(imageEl) {
+                imageEl.onerror=null; // prevent handling future errors
+                imageEl.src='https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/0.png'; // try using fallback
+            }
+        </script>
+
+    </head>
+
+    <body {% if theme_colour %} class="theme-{{ theme_colour }}" {% endif %}>
+
+        <nav class="navbar navbar-expand-lg p-3">
+            <a class="navbar-brand text-white" href="/">CS50 Pokedex</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <img class="close-image" src="/static/media/pokeball.png" alt="Closed Pokeball">
+                <img class="open-image" src="/static/media/open-pokeball.png" alt="Open Pokeball">
+            </button>
+            <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+                <div class="navbar-nav gap-3">
+                    {% if session["user_id"] %}
+                        <a class="nav-item nav-link text-white" href="/favourites">Favourites</a>
+                        <a class="nav-item nav-link text-white" href="/profile">Profile</a>
+                        <a class="nav-item nav-link text-white" href="/logout">Log Out</a>
+                    {% else %}
+                        <a class="nav-item nav-link text-white" href="/register">Register</a>
+                        <a class="nav-item nav-link text-white" href="/login">Log In</a>
+                    {% endif %}
+                </div>
+            </div>
+        </nav>
+
+        {% if get_flashed_messages() %}
+            <header>
+                <div class="alert alert-primary mb-0 text-center" role="alert">
+                    {{ get_flashed_messages() | join(" ") }}
+                </div>
+            </header>
+        {% endif %}
+
+        <main class="container py-3 text-center">
+            {% block main %}{% endblock %}
+        </main>
+
+        <footer class="p-3 pb-5 text-white">
+            <p>This website is not affiliated with, endorsed, sponsored, or specifically approved by Nintendo, The Pokémon Company, Bulbagarden, or any other entity with Pokémon trademarks or interests. This website is intended for educational and informational purposes only.</p>
+            <p>Information and Pokemon images from <a href="https://github.com/PokeAPI">PokéAPI</a></p>
+            <p>Pokeball images from <a href="https://copyicon.com/">copyicon.com</a></p>
+            <p>Fonts from <a href="https://www.dafont.com/">dafont.com</a></p>
+        </footer>
+
+    </body>
+
+</html>

@@ -1,0 +1,117 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    {{ pokemon.display_name }}
+{% endblock %}
+
+{% block main %}
+
+    <div class="row p-3 gap-4">
+
+        <section class="col-12 overview">
+            <img alt="{{ pokemon.display_name }}" src="{{ pokemon.graphic_url }}" onerror="handlePokemonGraphicLoadError(this)">
+            <div class="details">
+                <h2>{{ pokemon.display_name }}</h2>
+                <div>
+                    {% for type in pokemon.types %}
+                        <div class="badge type-{{ type.type.name }}">
+                            {{ type.type.name }}
+                        </div>
+                    {% endfor %}
+                </div>
+                <div>
+                    Weight: {{ pokemon.weight }}
+                </div>
+                <div>
+                    Height: {{ pokemon.height }}
+                </div>
+                {% if session["user_id"] %}
+                    <form class="mt-3" method="post">
+                        <input type="hidden" name="action" value="{{ favourite_button_action }}">
+                        <button class="btn btn-outline-danger">{{ favourite_button_action }}</button>
+                    </form>
+                {% endif %}
+            </div>
+        </section>
+
+        <section class="col-12">
+            <h3>Descriptions</h3>
+
+            {% for entry in pokemon.flavour_entries %}
+                <figure>
+                    <blockquote class="blockquote">
+                        <p>{{ entry.text }}</p>
+                    </blockquote>
+
+                    <figcaption class="blockquote-footer">
+                        <div class="badge text-bg-success game-version">{{ version }}</div>
+                        From game version(s)&nbsp;
+                        {% for version in entry.game_versions %}
+                            "<cite title="{{ version }}">{{ version }}</cite>"
+                            {% if not loop.last %}
+                                ,&nbsp;
+                            {% endif %}
+                        {% endfor %}
+                    </figcaption>
+                </figure>
+            {% endfor %}
+        </section>
+
+        {% if pokemon.varieties|length > 0 %}
+            <section class="col-12">
+                <h3>Varieties</h3>
+                <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 row-cols-xl-4 gap-4 justify-content-center">
+                    <!-- NOTE: there are no links to variety pokemon pages as they are not linked to the species and we couldnt show an overview, so we just show it here atleast -->
+                    {% for variety_pokemon in pokemon.varieties %}
+                        <div class="col">
+                            <article class="card pokemon">
+                                <img class="card-img-top m-auto" alt="{{ variety_pokemon.name }}" src="{{ variety_pokemon.graphic_url }}" onerror="handlePokemonGraphicLoadError(this)" loading="lazy">
+                                <div class="card-body">
+                                    <h3 class="card-text">{{ variety_pokemon.name }}</h3>
+                                </div>
+                            </article>
+                        </div>
+                    {% endfor %}
+                </div>
+            </section>
+        {% endif %}
+
+        {% if pokemon.evolves_from %}
+            <section class="col-12">
+                <h3>Evolves From</h3>
+                <div class="card-group justify-content-center">
+                    <a class="card pokemon" href="/pokemon/{{ pokemon.evolves_from.id }}">
+                        <article>
+                            <img class="card-img-top m-auto" alt="{{ pokemon.evolves_from.name }}" src="{{ pokemon.evolves_from.graphic_url }}" onerror="handlePokemonGraphicLoadError(this)" loading="lazy">
+                            <div class="card-body">
+                                <h3 class="card-text">{{ pokemon.evolves_from.name }}</h3>
+                            </div>
+                        </article>
+                    </a>
+                </div>
+            </section>
+        {% endif %}
+
+        {% if pokemon.evolves_to|length > 0 %}
+            <section class="col-12">
+                <h3>Evolves To</h3>
+                <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 row-cols-xl-4 gap-4 justify-content-center">
+                    {% for next_evolution_pokemon in pokemon.evolves_to %}
+                        <div class="row">
+                            <a class="card pokemon" href="/pokemon/{{ next_evolution_pokemon.id }}">
+                                <article>
+                                    <img class="card-img-top m-auto" alt="{{ next_evolution_pokemon.name }}" src="{{ next_evolution_pokemon.graphic_url }}" onerror="handlePokemonGraphicLoadError(this)" loading="lazy">
+                                    <div class="card-body">
+                                        <h3 class="card-text">{{ next_evolution_pokemon.name }}</h3>
+                                    </div>
+                                </article>
+                            </a>
+                        </div>
+                    {% endfor %}
+                </div>
+            </section>
+        {% endif %}
+
+    </div>
+
+{% endblock %}

@@ -1,0 +1,44 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Home
+{% endblock %}
+
+
+{% block main %}
+
+    <div class="container mt-3">
+        <form class="row gap-3" action="/">
+            <div class="form-floating col-12 col-md g-0">
+                <input autocomplete="off" autofocus class="form-control" id="text" name="text" placeholder="Name Includes" type="text" value="{{ search_text }}">
+                <label for="text">Name Includes</label>
+            </div>
+            <button class="col-12 col-md-2 btn btn-danger" type="submit">Filter</button>
+        </form>
+        <div class="mt-4 row text-center w-100">
+            <p>Showing {{ list|length }} / {{ total_count }} Pokemon</p>
+        </div>
+    </div>
+
+    <section class="container list p-0">
+
+        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 row-cols-xl-4 gap-4 justify-content-center">
+            {% for pokemon in list %}
+                <div class="col">
+                    <a class="card pokemon" href="/pokemon/{{ pokemon.id }}">
+                        <article>
+                            <img class="card-img-top" alt="{{ pokemon.name }}" src="{{ pokemon.graphic_url }}" onerror="handlePokemonGraphicLoadError(this)" loading="lazy">
+                            <div class="card-body">
+                                <div class="card-text">
+                                    <h3>{{ pokemon.name }}</h3>
+                                </div>
+                            </div>
+                        </article>
+                    </a>
+                </div>
+            {% endfor %}
+        </div>
+
+    </section>
+
+{% endblock %}

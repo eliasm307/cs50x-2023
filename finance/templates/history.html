@@ -1,0 +1,37 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Transaction History
+{% endblock %}
+
+{% block main %}
+
+    <h2 class="mb-3">Transaction History</h2>
+    <table class="table table-striped table-bordered table-hover">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Type</th>
+                <th scope="col">Symbol</th>
+                <th scope="col">Share Price</th>
+                <th scope="col">Shares Count</th>
+                <th scope="col">Total Value</th>
+                <th scope="col">Timestamp</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for row in rows %}
+                <tr class="{{ row['type'] }}">
+                    <th scope="row">{{ row['index'] }}</th>
+                    <td class="signed-value">{{ row['type'] }}</td>
+                    <td>{{ row['symbol'] }}</td>
+                    <td>{{ row['share_price'] }} / Share</td>
+                    <td class="signed-value">{{ row['shares_count'] }}</td>
+                    <td class="signed-value">{{ row['total_value'] }}</td>
+                    <td>{{ row['timestamp'] }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}

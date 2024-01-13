@@ -1,0 +1,249 @@
+@font-face {
+    font-family: PokemonHollow;
+    src: url(/static/fonts/PokemonHollow.ttf);
+}
+
+@font-face {
+    font-family: PokemonXY;
+    src: url(/static/fonts/PokemonXandY.ttf);
+}
+
+h1,
+h2 {
+    font-family: PokemonHollow;
+}
+
+h3 {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}
+
+body {
+    font-family: PokemonXY;
+
+    /* Make body use up all the available height atleast */
+    min-height: 100dvh;
+    display: flex;
+    flex-direction: column;
+
+    /* Default */
+    --theme-colour: var(--bs-danger);
+
+    nav,
+    footer {
+        background: var(--theme-colour);
+    }
+
+    &.theme-brown {
+        --theme-colour: sandybrown;
+    }
+
+    &.theme-yellow {
+        --theme-colour: var(--bs-warning);
+
+        nav,
+        footer {
+            &.text-white,
+            .text-white {
+                /* Adjust text colour for readability */
+                color: darkslategray !important;
+            }
+        }
+
+    }
+
+    &.theme-green {
+        --theme-colour: var(--bs-success);
+    }
+
+    &.theme-blue {
+        --theme-colour: var(--bs-primary);
+    }
+
+    &.theme-white {
+        --theme-colour: var(--bs-secondary);
+    }
+
+    &.theme-gray {
+        --theme-colour: var(--bs-dark);
+    }
+
+    &.theme-purple {
+        --theme-colour: purple;
+    }
+
+    &.theme-pink {
+        --theme-colour: hotpink;
+    }
+}
+
+main {
+    /* Make body use remaining vertical space if header + body + footer doesnt use the whole page */
+    flex: 1;
+    margin: auto;
+}
+
+/* Improve link styling, to work with different backgrounds and font colours */
+a {
+    color: inherit;
+    text-decoration: underline dotted;
+
+    &:hover {
+        text-decoration: underline;
+    }
+}
+
+nav {
+    .navbar-brand {
+        /* So this is readable with coloured background */
+        font-weight: bold;
+        font-family: PokemonHollow;
+        font-size: 50px;
+
+        /* Improve alignment */
+        margin-top: -1rem;
+
+        /* Try to avoid the menu button being wrapped, by eagerly wrapping the brand text */
+        @media (max-width: 576px) {
+            width: min-content;
+        }
+    }
+
+    .nav-item {
+        font-size: 30px;
+    }
+
+    /*
+    Use a pokeball as the nav-toggle icon,
+    ie a closed ball when the menu is closed
+    and an open ball when menu open
+    */
+    .navbar-toggler {
+        img {
+            display: none;
+            width: 3rem;
+            height: 3rem;
+        }
+
+        &[aria-expanded=true] {
+            .open-image {
+                display: unset;
+            }
+        }
+
+        &[aria-expanded=false] {
+            .close-image {
+                display: unset;
+            }
+        }
+    }
+}
+
+.card-group {
+    justify-content: center;
+}
+
+.card.pokemon {
+    padding: 1rem;
+    flex: unset;
+
+    &:is(a) {
+        &:hover,
+        &:focus-visible {
+            /* Show thicker border for hover target (accounting for colour-blind users) */
+            outline: 0.25rem solid var(--bs-danger);
+        }
+    }
+
+    .card-img-top {
+        /* Limit height so pokemon can be displayed consistently as cards */
+        height: 15rem;
+        max-width: 100%;
+        object-fit: contain;
+        margin: auto;
+    }
+
+    .card-body {
+        padding: 0;
+    }
+
+}
+
+section {
+    padding-bottom: 1rem;
+
+    /* Overview section on a specific pokemon page */
+    &.overview {
+        display: flex;
+        place-items: center;
+        place-content: center;
+        flex-wrap: wrap;
+        gap: 1rem;
+
+        img {
+            width: 15rem;
+        }
+
+        .details {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+
+            /* See available types: https://pokeapi.co/api/v2/type */
+            .badge {
+                /* Default */
+                background: gray;
+                color: white;
+
+                &.type-grass {
+                    background: var(--bs-success);
+                }
+
+                &.type-poison {
+                    background: purple;
+                }
+
+                &.type-water {
+                    background: var(--bs-primary);
+                }
+
+                &.type-fire {
+                    background: var(--bs-danger);
+                }
+            }
+        }
+    }
+}
+
+.list {
+
+    /* Grayscale all images on hover, the target image will be shown in colour */
+    &:has(.card:hover) {
+        .card {
+            img {
+                filter: grayscale(1);
+            }
+        }
+    }
+
+    .card {
+
+
+
+        &:hover {
+
+            /* Show hover target in colour */
+            img {
+                filter: unset !important;
+            }
+        }
+
+        img {
+            transition: filter 1s;
+            /* Make image sizes consistent for grid */
+            height: 15rem;
+        }
+
+    }
+
+}

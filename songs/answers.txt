@@ -1,0 +1,51 @@
+Question:
+
+If songs.db contains the top 100 songs of one listener from 2018,
+how would you characterize their audio aura?
+
+My Answer:
+
+To determine the audio aura of a user based on the given metrics,
+some reference baseline values for the auras/moods that relate to different
+song metrics would need to be determined, e.g. through research or user surveys.
+This could be asking a diverse set of reference users what aura they categorize themselves in,
+or asking questions to determine their aura then getting the average metrics of their top songs,
+and then getting the overall average for all reference users as the baseline.
+If possible, weights could also be assigned to different metrics in terms of how important
+they are to determining the mood.
+
+Once the reference baseline ranges are determined for the different auras,
+we could get the average for each metric of the current user's top 100 songs
+then find which aura the user's top song average metrics are most similar to.
+This could be done by representing the metric values as a set of coordinates
+for a "point" in some n-dimensional space and calculating which reference aura "point"
+has the shortest overall distance to the current user's top songs metrics "point".
+
+-------------------------------
+
+Question:
+
+Hypothesize about why the way you’ve calculated this aura might not be very representative of the listener.
+What better ways of calculating this aura would you propose?
+
+Answer:
+
+The method I suggested is based on a limited set of metrics which might not tell the full story
+about the aura of an individual song, e.g. the metrics dont take into account details such as
+the lyrics which can also define if a song is happy, sad etc but the metrics could be the same or similar.
+So using the metrics to directly relate to aura could be innacurate as it doesnt account for all the details
+and not represent the user.
+
+Another aspect that consider is that the baselines for the moods are determined based on the average opinions of different people,
+which might not represent the current user accurately, so the comparison might be done on innacurate baselines.
+
+Since we are taking the average of all the song metrics, if some songs have significantly higher metrics than others
+then they can skew the averages and some details of the user preferences could be lost as part of this
+and the average might not be representative.
+
+Alternative ways of calculating the aura could be:
+- Assigning aura scores to each song individually then counting how many times each aura is the most signifciant song aura,
+  then sorting the auras where the one with the majority of times as most significant aura is the most likely user aura
+- Assigning aura scores to each song individually then treating them like votes and using voting algorithms like Tideman
+  to determine what is the "winner" aura
+- Increasing the number of metrics used to calculate the aura, hoping this would provide more details to consider about a user

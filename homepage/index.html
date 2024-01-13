@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+    <head>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+        <script defer src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+        <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
+        <script defer src="index.js"></script>
+        <link href="styles.css" rel="stylesheet">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Starter Pokémon</title>
+        <link rel="icon" type="image/png" href="/media/pokeball.png">
+    </head>
+
+    <body>
+        <header>
+            <nav class="navbar navbar-expand-lg text-white p-3">
+                <a class="navbar-brand text-white" href="/index.html">
+                    <h1>Starter Pokémon</h1>
+                </a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <img class="close-image" src="/media/pokeball.png" alt="Closed Pokeball">
+                    <img class="open-image" src="/media/open-pokeball.png" alt="Open Pokeball">
+                </button>
+                <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+                    <div class="navbar-nav gap-3">
+                        <a class="nav-item nav-link text-white" href="/bulbasaur">Bulbasaur</a>
+                        <a class="nav-item nav-link text-white" href="/charmander">Charmander</a>
+                        <a class="nav-item nav-link text-white" href="/squirtle">Squirtle</a>
+                        <button id="pick-random" type="button" class="nav-item btn btn-outline-light">Pick Random</button>
+                    </div>
+                </div>
+            </nav>
+        </header>
+
+        <main class="p-3">
+            <section>
+                <h2>What is a starter Pokémon?</h2>
+                <p>
+                    A starter Pokémon is the first Pokémon that a Pokémon Trainer obtains at the start of their Pokémon journey, most commonly gifted to them by a Pokémon Professor, parent, or teacher, or encountered in the wild near the town in which the trainer begins their journey. This Pokémon will be used to battle the first wild Pokémon that a Trainer encounters.
+                </p>
+            </section>
+            <section>
+                <h2>Starter Pokémon Options</h2>
+                <p>Pick a Pokémon to learn more about it!</p>
+                <div class="starter-list card-group">
+                    <a class="card" href="/bulbasaur">
+                        <article>
+                            <img class="card-img-top" alt="Bulbasaur" src="/media/bulbasaur.png">
+                            <div class="card-body">
+                                <h3 class="card-text">Bulbasaur</h3>
+                            </div>
+                        </article>
+                    </a>
+                    <a class="card" href="/charmander">
+                        <article>
+                            <img class="card-img-top" alt="Charmander" src="/media/charmander.png">
+                            <div class="card-body">
+                                <h3 class="card-text">Charmander</h3>
+                            </div>
+                        </article>
+                    </a>
+                    <a class="card" href="/squirtle">
+                        <article>
+                            <img class="card-img-top" alt="Squirtle" src="/media/squirtle.png">
+                            <div class="card-body">
+                                <h3 class="card-text">Squirtle</h3>
+                            </div>
+                        </article>
+                    </a>
+                </div>
+            </section>
+        </main>
+
+        <footer class="p-3 text-white">
+            <p>This website is not affiliated with, endorsed, sponsored, or specifically approved by Nintendo, The Pokémon Company, Bulbagarden, or any other entity with Pokémon trademarks or interests. This website is intended for educational and informational purposes only.</p>
+            <p>Information and Pokemon images from <a href="https://bulbapedia.bulbagarden.net/wiki/Starter_Pok%C3%A9mon">bulbagarden.net</a></p>
+            <p>Pokeball images from <a href="https://copyicon.com/">copyicon.com</a></p>
+            <p>Fonts from <a href="https://www.dafont.com/">dafont.com</a></p>
+        </footer>
+
+    </body>
+
+</html>

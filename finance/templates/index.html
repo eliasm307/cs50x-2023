@@ -1,0 +1,43 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Home
+{% endblock %}
+
+{% block main %}
+
+    <h2 class="mb-3">Stocks Summary</h2>
+    <table class="table table-striped table-bordered table-hover">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Symbol</th>
+                <th scope="col">Shares Count</th>
+                <th scope="col">Current Price</th>
+                <th scope="col">Current Total Value</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for row in rows %}
+                <tr>
+                    <th scope="row">{{ row['index'] }}</th>
+                    <td>{{ row['symbol'] }}</td>
+                    <td>{{ row['count'] }}</td>
+                    <td>{{ row['share_price'] }} / Share</td>
+                    <td>{{ row['total_value'] }}</td>
+                </tr>
+            {% endfor %}
+            <tr>
+                <td colspan="4">All Stocks</td>
+                <td><b>{{ stocks_total_value }}</b></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h2 class="mt-5 mb-3">Current Balance</h2>
+    <p class="display-6">{{ current_balance }}</p>
+
+    <h2 class="mt-5 mb-3">Grand Total</h2>
+    <p class="display-6">{{ stocks_total_value }} (Stocks) + {{ current_balance }} (Balance) = <b>{{ grand_total }}</b> </p>
+
+{% endblock %}
